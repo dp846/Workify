@@ -1,0 +1,25 @@
+.wrapper {
+    color: var(--tertiary-color);
+}
+
+.progress_links {
+    display: flex;  
+    gap: 20px;
+    width: 10px;
+    margin: 30px 50px;
+    cursor: pointer;
+}
+
+.chart_container {
+    display: flex;
+    justify-content: center;
+    width: 95vw;
+    height: 70vh;
+}
+
+#chart {
+    width: 100%;
+    position: relative; 
+    max-width: 80vw;
+    max-height: 70vh;
+}

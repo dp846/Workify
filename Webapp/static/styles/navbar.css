@@ -1,0 +1,64 @@
+.navbar{
+    width:100vw;
+    line-height: .6em;
+    overflow-wrap: normal;
+}
+
+.navbar_items {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+}
+.nav_links{
+    line-height: .2em;
+    list-style: none;
+}
+.nav_links a{
+    text-decoration: none;
+    font-size: .3em;
+    line-height: 0;
+    color: var(--tertiary-color);
+    text-transform: uppercase;
+}
+.nav_links .active,.nav_links a:hover{
+    text-decoration: underline;
+    text-underline-offset: 8px;
+    text-decoration-thickness: 3px;
+}
+.user_points {
+    float: left;
+    height: 40px;
+    color: var(--tertiary-color);
+    font-size: .3em;
+    padding: 0 8px;
+    margin: 10px 20px 0 0;
+    background-color: var(--secondary-color);
+    border-radius: 30px;
+    display: flex;
+    gap: 10px;
+    display: inline-flex;
+    align-items: center;
+}
+
+#logo{
+    margin-right: 195px;
+    margin-left: 10px;
+}
+#logout_button{
+    background-color: var(--tertiary-color);
+    border-radius: 5px;
+    margin: 10px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+#logout{
+    text-decoration: none;
+    color: var(--main-color);
+    /* font-size: .3em; */
+    font-size: 25%;
+    line-height: 0.4em;
+}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<link rel="stylesheet" href="/static/styles/navbar.css" type="text/css" charset="utf-8">
+{% endblock %}
+
+{% block content %}
+
+<body>
+
+
+    <div class="chart" align='center'>
+
+        {% include 'navbar.html' %}
+
+        <div style="text-align: center; color: #0e2d3c;">
+            MUSIC GENRES YOU LIKE
+        </div>
+
+        <canvas id="musicPreferences" style="width: 100%; max-width: 1400px">
+        </canvas>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
+
+    <script>
+        Chart.defaults.global.defaultFontColor = "#0e2d3c";
+
+        var labels = {{ labels| safe }};
+        var data = {{ data|safe }};
+        var colors = {{ colors|safe }};
+
+        new Chart("musicPreferences", {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Number of songs listened to in this genre",
+                    backgroundColor: colors,
+                    borderColor: '#0e2d3c',
+                    data: data
+                }]
+            },
+            options: {
+                title: {
+                    display: false
+                }
+            }
+        });
+    </script>
+
+</body>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/scripts/music_genres.js"></script>
+{% endblock %}

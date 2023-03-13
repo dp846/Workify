@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+    
+{% block styles %}
+    <link rel="stylesheet" href="/static/styles/home.css" type="text/css"charset="utf-8">
+{% endblock %}
+
+
+{% block content %}
+    <div class="topbar">
+        <img id="logo" src="/static/images/hummingbird.png"  alt="Logo" width="60px">
+    </div>
+    <div class="center_div">
+        <ul class="page_links">
+            <li><a class="link" id="goals" href="/goals">Goals</a></li>
+            <li><a class="link"id="timer" href="/timer">Timer</a></li>
+            <li><a class="link"id="progress" href="/progress">Progress</a></li>
+        </ul>
+    </div>
+{% endblock %}
+
+
+{% block scripts %}
+    <script src="/static/scripts/home.js"></script>
+{% endblock %}

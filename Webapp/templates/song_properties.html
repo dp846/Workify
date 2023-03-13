@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<link rel="stylesheet" href="/static/styles/navbar.css" type="text/css" charset="utf-8">
+{% endblock %}
+
+{% block content %}
+<body>
+
+    <div class="chart" align='center'>
+
+        {% include 'navbar.html' %}
+
+        <div style="text-align: center; color: #0e2d3c;">
+            PROPERTIES OF THE SONGS YOU LISTEN TO
+        </div>
+
+        <canvas id="songProperties" style="width: 100%; max-width: 1400px">
+        </canvas>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
+
+    <script>
+
+        Chart.defaults.global.defaultFontColor = "#0e2d3c";
+
+        var chr_ctx = document.getElementById('songProperties').getContext('2d');
+
+        var background_1 = chr_ctx.createLinearGradient(0, 0, 0, 800);
+        background_1.addColorStop(0, 'rgba(255,255,0,0.85)');
+        background_1.addColorStop(1, 'rgba(255,0,0,0.85)');
+
+        var labels = {{ labels|safe }};
+        var data = {{ data|safe }};
+
+        new Chart("songProperties",
+        {
+            type: 'radar',
+            data:
+            {
+                labels: labels,
+                datasets:
+                [{
+                    label: "Value",
+                    backgroundColor: background_1,
+                    borderColor: '#0e2d3c',
+                    data: data
+                }]
+            },
+            options:
+            {
+                legend: {
+                    display: false
+                },
+                title:
+                {
+                    display: false
+                },
+                scale:
+                {
+                    ticks:
+                    {
+                        beginAtZero: true,
+                        max: 1,
+                        min: 0,
+                        stepSize: 0.1,
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="/static/scripts/song_properties.js"></script>
+{% endblock %}

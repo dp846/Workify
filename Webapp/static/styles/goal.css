@@ -1,0 +1,172 @@
+.wrapper{
+    color: var(--tertiary-color);
+}
+
+.goal_links{
+    display: flex;  
+    gap: 20px;
+    width: 10px;
+    margin: 30px 50px;
+    cursor: pointer;
+}
+
+.goals_grid{
+    margin-left: 2.5vw;
+    width: 95vw;
+    height: 70vh;
+    display: grid;
+    grid-template-columns: 4fr 4fr 4fr 4fr;
+    grid-template-rows: 1fr 1fr;
+    grid-column-gap: 40px;
+    grid-row-gap: 20px;
+}
+
+.card{
+    background-color: var(--secondary-color);
+    border-bottom: 10px solid var(--contrasting-color);
+    padding: 10px;
+    line-height: .8em;
+    font-size: .6em;
+    box-shadow: 2px 2px 4px rgb(180, 180, 180);
+    border-radius: 10px;
+    text-align: center;
+}
+.card span {
+    font-weight: bold;
+    font-size: .5em;
+}
+
+.goal_button {
+    background-color: var(--contrasting-color);
+    color: aliceblue;
+    border: none;
+    float: left;
+    font-size: .4em;
+    border-radius: 10px;
+    padding: .3em .6em;
+    cursor: pointer;
+}
+
+.update_goal{
+    float: left;
+}
+
+.delete_goal{
+    float: right;
+}
+
+.progress_text {
+    fill: var(--tertiary-color);
+}
+
+.add_goal{
+    text-align: center;
+    border: none;
+    opacity: 0.5;
+    padding: 30% 0;
+    color: var(--tertiary-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.title{
+    background-color: var(--secondary-color);
+    color: var(--tertiary-color);
+    border-radius: 10px 10px 0 0;
+}
+.entry_field{
+    width: auto;
+}
+
+.close_button{
+    background-color: var(--secondary-color);
+}
+
+#create_goal_form {
+    position: absolute;
+    top:20vh;
+    margin-left: 35vw;
+    width: 30vw;
+    background-color: var(--main-color);
+    font-size: .6em;
+    box-shadow:0 0 0 100vw rgba(0,0,0,0.65);
+    visibility: hidden;
+    text-align: center;
+    padding-bottom: 20px;
+    border-radius: 10px;
+}
+
+#update_goal_form {
+    position: absolute;
+    top:20vh;
+    margin-left: 35vw;
+    width: 30vw;
+    background-color: var(--main-color);
+    font-size: .6em;
+    box-shadow:0 0 0 100vw rgba(0,0,0,0.65);
+    visibility: hidden;
+    text-align: center;
+    padding-bottom: 20px;
+    border-radius: 10px;
+}
+
+.form_row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.submit_button {
+    width: 300px;
+}
+
+.entry_field {
+    width: auto;
+    height: 30px;
+}
+
+#confirm_delete{
+    position: absolute;
+    top:20vh;
+    margin-left: 35vw;
+    width: 27vw;
+    background-color: var(--main-color);
+    color: var(--tertiary-color);
+    font-size: .6em;
+    box-shadow:0 0 0 100vw rgba(0,0,0,0.65);
+    visibility: hidden;
+    padding: 20px;
+    border-radius: 10px;
+}
+#confirm_delete .center{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px    ;
+}
+.action_button{
+    background-color: var(--secondary-color);
+    color: var(--tertiary-color);
+    border: none;
+    border-radius: 10px;
+    padding: .5em .6em;
+    font-size: .6em;
+    width: 14vw;
+}
+#delete {
+    background-color:crimson;
+    color: whitesmoke;
+    border: none;
+}
+
+#cancel {
+    background-color: white;
+    border: 2px solid gray;
+}
+.container {
+    margin: auto;
+    width: 180px;
+    height: 180px;
+    position: relative;
+  }

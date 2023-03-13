@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/styles/goal.css" type="text/css"charset="utf-8">
+{% endblock %}
+
+
+{% block content %}
+<div class="scrollable">
+    {% include "navbar.html" %}
+
+    <div class="wrapper">
+        <div style="text-align: center;">
+            MY GOALS
+        </div>
+        <div class="nav_links goal_links">
+            <a class="{{'active' if context['type'] == 'productivity'}}" style="text-decoration-thickness:4px;">productivity</a>
+            <a class="{{'active' if context['type'] == 'music'}}" style="text-decoration-thickness:4px;">music</a>
+        </div>
+        <div class="goals_grid scrollable">
+            {% for goal in context["goals"] %}
+                <div class="card" id="{{goal.id}}">
+                    <button class="goal_button update_goal hover" onclick="update_goal(this)">Update</button>
+                    <button class="goal_button delete_goal hover" onclick="delete_goal(this)">Delete</button>
+                    <br>
+                    {% if context["type"] == "productivity" %}
+                        <div class="container">
+                            <svg viewBox="0 0 100 100">
+                                <path d="M 50,50 m 0,-48 a 48,48 0 1 1 0,96 a 48,48 0 1 1 0,-96" stroke="black" stroke-width="4" stroke-opacity="0.1" fill-opacity="0" style="stroke-dasharray: 301.635, 301.635; stroke-dashoffset: 0;"></path>
+                                <path d="M 50,50 m 0,-48 a 48,48 0 1 1 0,96 a 48,48 0 1 1 0,-96" stroke="green" stroke-width="4" fill-opacity="0" style="stroke-dasharray: 301.635, 301.635; stroke-dashoffset: {{301 - (301 * goal.progress/100)}};"></path>
+                                <text x="50%" y="50%" text-anchor="middle" font-size=".5em" font-family="Arial">{{goal.progress}}%</text>
+                                <text name="goal_value" value="{{goal.goal_time}}" x="50%" y="50%" text-anchor="middle" font-size=".3em" font-family="Arial" dy="1.2em">{{goal.goal_time}} Hour{{'s' if goal.goal_time>1}}</text>
+                            </svg>
+                        </div>
+                        <span name="dates" value="{{goal.date_created}},{{goal.end_date}}" style="margin: 0;">{{goal.date_created.strftime("%d/%m/%Y")}} - {{goal.end_date.strftime("%d/%m/%Y")}}</span>
+                    {% elif context["type"] == "music" %}
+                        <div class="container">
+                            <svg viewBox="0 0 100 100">
+                                <defs>
+                                    <linearGradient id="grad1">
+                                        <stop offset="0%" stop-color="red"/>
+                                        <stop offset="10%" stop-color="blue"/>
+                                        <stop offset="100%" stop-color="green"/>
+                                    </linearGradient>
+                                </defs>
+                                <path d="M 50,50 m 0,-48 a 48,48 0 1 1 0,96 a 48,48 0 1 1 0,-96" stroke="black" stroke-width="4" stroke-opacity="0.1" fill-opacity="0" style="stroke-dasharray: 301.635, 301.635; stroke-dashoffset: 0;"></path>
+                                <path d="M 50,50 m 0,-48 a 48,48 0 1 1 0,96 a 48,48 0 1 1 0,-96" stroke="green" stroke-width="4" fill-opacity="0" style="stroke-dasharray: 301.635, 301.635; stroke-dashoffset: {{301 - (301 * goal.progress/100)}};"></path>
+                                <text class="progress_text" x="50%" y="50%" text-anchor="middle" font-size=".5em"  font-family="Arial">{{goal.progress}}%</text>
+                                <text class="progress_text" x="50%" y="50%" text-anchor="middle" font-size=".25em" font-family="Arial" dy="1.3em">{{context["feature_names"][goal.music_feature]}}</text>
+                            </svg>
+                        </div>
+                        <small name="goal_value" value="{{goal.feature_percentage}},{{context['feature_names'][goal.music_feature]}}" style="font-size: .5em; margin: 0;">Goal: {{goal.feature_percentage}}% {{context["feature_names"][goal.music_feature]}}</small>
+                        <br>
+                        <span name="dates" value="{{goal.date_created}},{{goal.end_date}}" style="margin: 0;">{{goal.date_created.strftime("%d/%m/%Y")}} - {{goal.end_date.strftime("%d/%m/%Y")}}</span>
+                    {% endif %}
+                </div>  
+            {% endfor %}
+            <button class="card add_goal hover" onclick="add_goal()">+</button>
+        </div>
+    </div>
+
+    <form class="scrollable" id="create_goal_form" action="{{ url_for('GoalView:post') }}" method="post">
+        <button class="close_button" type="button" onclick="this.parentNode.style.visibility='hidden';">X</button>
+        <div class="title">
+            Add Goal
+        </div>
+        {% if context["type"] == "productivity" %}
+            <input type="hidden" name="type" value="productivity" />
+            <div class="form_row">
+                <input class="entry_field" type="text" maxlength="4" name="goal_time">
+                <small>Hours</small>
+            </div>
+            <div class="form_row">
+                <small>Start Time: </small>
+                <input class="entry_field" type="date" id="start_date" maxlength="2" name="start_date">
+            </div>
+            <div class="form_row">
+                <small>End Time: </small>
+                <input class="entry_field" type="date" id="end_date" maxlength="2" name="end_date">
+            </div>
+            <br>
+        {% elif context["type"] == "music" %}
+            <input type="hidden" name="type" value="music" />
+            <div>
+                <small for="music_feature">Select music feature:</small>
+                <select class="entry_field" name="music_feature" id="music_feature">
+                {% for feature,feature_name in context["feature_names"].items() %}
+                    <option value="{{feature}}">{{feature_name}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="form_row">
+                <small>Feature percentage</small>
+                <input class="entry_field" type="text" minlength="0" maxlength="3" name="feature_percentage">
+            </div>
+            <div class="form_row">
+                <small>Start Time: </small>
+                <input class="entry_field" type="date" id="start_date" maxlength="2" name="start_date">
+            </div>
+            
+            <div class="form_row">
+                <small>End Time: </small>
+                <input class="entry_field" type="date" id="end_date" maxlength="2" name="end_date">
+            </div>
+            <br>
+        {% endif %}
+        <input class="submit_button hover" type="submit">
+    </form>
+
+    <form class="scrollable" id="update_goal_form" action="{{ url_for('GoalView:update_goal') }}" method="post">
+        <button class="close_button" type="button" onclick="this.parentNode.style.visibility='hidden';">X</button>
+        <div class="title">
+            Update Goal
+        </div>
+            <input type="hidden" name="goal_type" value="{{context['type']}}">
+            <input type="hidden" name="goal_id" id="update_goal_id" value="">
+            <div class="form_row">
+                <input class="entry_field" id="update_goal_value" type="text" maxlength="4" name="goal_value">
+                <small id="goal_value_type">Hours</small>
+            </div>
+            <div class="form_row">
+                <small>Start Time: </small>
+                <input class="entry_field" type="date" id="update_start_date" maxlength="2" name="start_date">
+            </div>
+            <div class="form_row">
+                <small>End Time: </small>
+                <input class="entry_field" type="date" id="update_end_date" maxlength="2" name="end_date">
+            </div>
+            <br>
+        <input class="submit_button hover" type="submit">
+    </form>
+
+    <form class="scrollable" id="confirm_delete" action="{{ url_for('GoalView:delete_goal') }}" method="post">
+        Delete Goal
+        <br>
+        <small style="font-size: .6em;">This action cannot be undone.</small>
+        <br>
+        <input type="hidden" name="goal_type" value="{{context['type']}}">
+        <input type="hidden" name="goal_id" id="delete_goal_id" value="">
+        <div class="center" style="gap: 20px">
+            <button id="cancel" class="action_button hover" type="button" onclick="this.parentNode.parentNode.style.visibility='hidden';">Cancel</button>
+            <button id="delete" class="action_button hover" type="submit">Delete</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+    <script>const type = "{{context['type']}}";</script>
+    <script src="/static/scripts/goals.js"></script>
+{% endblock %}

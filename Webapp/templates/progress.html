@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/styles/progress.css" type="text/css" charset="utf-8">
+{% endblock %}
+
+{% block content %}
+    <div class="scrollable"> 
+        {% include 'navbar.html' %}
+        <div class="wrapper">
+            <div style="text-align: center;">
+                PRODUCTIVITY
+            </div>
+            <div class="nav_links progress_links">
+                <a class='active' style="text-decoration-thickness:4px;" onclick="productivity(this)">productivity</a>
+                <a style="text-decoration-thickness:4px;" onclick="track_properties(this)">track_features</a>
+            </div>
+            <div class="chart_container">
+                <canvas id="chart"></canvas>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script>
+        var xValues = {{ xValues|safe }};
+        var yValues = {{ yValues|safe }};
+        var labels = {{ labels|safe }};
+        var data = {{ data| safe }};
+        var data2 = {{ data2| safe }};
+    </script>
+    <script src="/static/scripts/progress.js"></script>
+{% endblock %}

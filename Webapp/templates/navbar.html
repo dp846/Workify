@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="/static/styles/navbar.css" type="text/css"charset="utf-8">
+
+<div class="navbar">
+    <ul class="navbar_items">
+        <li><img id="logo" src="/static/images/hummingbird.png"  alt="Logo" width="60px"></li>
+        <li class="nav_links">
+            <a href="/home" id="home_link">home</a>
+            <a class="active" href="/goals" id="goals_link">goals</a>
+            <a href="/timer" id="timer_link">timer</a>
+            <a href="/progress" id="progress_link">progress</a>
+        </li>
+        <div>
+            <div class="user_points">
+                <img src="/static/images/points.png"  alt="Coin" width="30px" height="30px"></li>
+                <span>Points: {{points}}</span>
+            </div>
+            <li id="logout_button"><a class="hover" id="logout" href="/logout">Logout</a></li>
+        </div>
+    </ul>
+</div>

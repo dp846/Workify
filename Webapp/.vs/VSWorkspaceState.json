@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\static",
+    "\\static\\images",
+    "\\static\\scripts",
+    "\\static\\styles",
+    "\\templates",
+    "\\utils",
+    "\\utils\\__pycache__"
+  ],
+  "SelectedNode": "\\main.py",
+  "PreviewInSolutionExplorer": false
+}

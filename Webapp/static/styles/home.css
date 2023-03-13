@@ -1,0 +1,36 @@
+.topbar{
+    position: absolute;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.center_div{
+    margin: auto;
+    align-items: center;
+    width: 100%;
+}
+.page_links {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style: none;
+}
+
+.center_div li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: clamp(1.5em, 8vw, 3em);
+    color: var(--tertiary-color);
+    display: inline-block;
+    transition: opacity .3s linear;
+}
+
+
+@keyframes grow { 100% {
+    transform:scale(1.1);
+  }}

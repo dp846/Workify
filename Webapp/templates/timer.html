@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/styles/timer.css" type="text/css"charset="utf-8">
+{% endblock %}
+
+
+{% block content %}
+<div class="scrollable">
+    {% include "navbar.html" %}
+    <div class="center">
+        <div class="wrapper">
+            <div>TIMER</div>
+            <div>
+                <svg class="timer">
+                    <circle class="progress" cx="160" cy="160" r="150"></circle>
+                    <circle class="time_container" cx="160" cy="160" r="150"></circle>
+                    <text class="time" dominant-baseline="central" text-anchor="middle" x="50%" y="-50%">00:00:00</text> 
+                </svg>
+            </div>
+            <div class="timer_buttons">
+                <button class="timer_buttons submit_button hover" id="pause">PAUSE</button>
+                <button class="timer_buttons submit_button hover" id="start">START</button>
+                <button class="timer_buttons submit_button hover" id="restart">RESTART</button>
+            </div>
+        </div>
+    </div>
+    <form class="center scrollable" id="submit_session" method="POST" action="{{ url_for('TaskView:post') }}">
+        <button class="close_button" type="button" onclick="this.parentNode.style.visibility='hidden';">X</button>
+        <h4>Rate your productivity</h4>
+        <h6>
+            <p>Scroll through the slider to increase or decrease rating.<br>
+            A rating of 10 means the session was as productive as possible.<br>
+            A rating of 0 means the session was not productive at all.</p>
+        </h6>
+        <div class="rangeslider center">
+            <input type="range" min="0" max="10" value="0" class="myslider" id="sliderRange" name="rating">
+            <p>Value: <span id="value"></span></p>
+        </div>
+        <input type="hidden" id="time_elapsed" name="time" value="0">
+        <button class="submit_button" id="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+    <script src="/static/scripts/timer.js"></script>
+{% endblock %}
